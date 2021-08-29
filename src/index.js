@@ -9,9 +9,14 @@ module.exports = function check(str, bracketsConfig) {
 
   for (let i = 0; i < str.length; i++) {
     let currentBracket = str[i];
-
-    if(openBrackets.includes(currentBracket) && currentBracket !== stack[stack.length -1]){
-      stack.push(currentBracket);
+    if (openBrackets.includes(currentBracket) && !bracketsPair.hasOwnProperty(currentBracket)){
+        stack.push(currentBracket);
+    } else if(openBrackets.includes(currentBracket) && bracketsPair.hasOwnProperty(currentBracket)){
+        if(stack[stack.length - 1] !== currentBracket){
+            stack.push(currentBracket);
+        } else {
+            stack.pop();
+        }
     } else {
         if (stack.length === 0){
             return false;
