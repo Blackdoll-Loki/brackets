@@ -10,7 +10,7 @@ module.exports = function check(str, bracketsConfig) {
   for (let i = 0; i < str.length; i++) {
     let currentBracket = str[i];
 
-    if(openBrackets.includes(currentBracket)){
+    if(openBrackets.includes(currentBracket) && currentBracket !== stack[stack.length -1]){
       stack.push(currentBracket);
     } else {
         if (stack.length === 0){
@@ -18,7 +18,6 @@ module.exports = function check(str, bracketsConfig) {
         }
         
         let topElement = stack[stack.length - 1];
-
         if (bracketsPair[currentBracket] === topElement){
             stack.pop();
         } else {
